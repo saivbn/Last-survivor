@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101811" />
+    <meta name="description" content="Last Survivor — a Three.js third-person battle royale prototype." />
+    <title>Last Survivor | Battle Royale</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark">LS</span><div><strong>LAST SURVIVOR</strong><small>TACTICAL BATTLE ROYALE</small></div></div>
+        <div class="server"><i></i> ISLAND ONLINE <span>• SOLO TRAINING</span></div>
+      </header>
+      <main class="layout">
+        <section class="game-column">
+          <div class="stats-row">
+            <div class="stat"><small>ALIVE</small><strong id="alive">11</strong></div>
+            <div class="stat"><small>ELIMINATIONS</small><strong id="kills">0</strong></div>
+            <div class="stat"><small>SAFE ZONE</small><strong id="zone-stat">100%</strong></div>
+            <div class="stat"><small>SURVIVAL TIME</small><strong id="time">00:00</strong></div>
+          </div>
+          <div id="viewport" class="viewport">
+            <div id="loading" class="loading"><div class="loader"></div><b>PREPARING BATTLEFIELD</b><span>Building terrain, island and operators…</span></div>
+            <div class="crosshair">+</div>
+            <div class="touch-controls" aria-label="Touch game controls">
+              <div id="move-stick" class="move-stick"><div class="stick-ring"></div><div id="stick-knob" class="stick-knob"></div><small>MOVE</small></div>
+              <div class="touch-actions"><button id="touch-reload" aria-label="Reload">↻</button><button id="touch-heal" aria-label="Use medkit">✚</button><button id="touch-jump" aria-label="Jump">↑</button><button id="touch-fire" class="fire-button" aria-label="Fire">FIRE</button></div>
+              <div class="touch-hint">DRAG RIGHT SIDE TO AIM</div>
+            </div>
+            <div class="view-label">THIRD-PERSON VIEW <span>•</span> TRAINING ISLAND</div>
+            <div id="toast" class="toast">Deploy when ready.</div>
+            <div id="start-screen" class="screen">
+              <div class="eyebrow">OPERATION: LAST LIGHT</div>
+              <div class="hero-icon">⌖</div>
+              <h1>LAST<br><em>SURVIVOR</em></h1>
+              <p>Drop into the island. Gear up. Eliminate hostile operators. Be the last one standing.</p>
+              <button id="deploy" class="primary">DEPLOY TO ISLAND <span>→</span></button>
+              <div class="screen-foot">WASD / LEFT STICK MOVE&nbsp;&nbsp; • &nbsp;&nbsp;MOUSE / DRAG AIM&nbsp;&nbsp; • &nbsp;&nbsp;CLICK / FIRE BUTTON</div>
+            </div>
+            <div id="pause-screen" class="screen hidden"><div class="eyebrow">TACTICAL SYSTEM</div><h2>PAUSED</h2><p>Take a breath, operator.</p><button id="resume" class="primary">RESUME MISSION</button></div>
+            <div id="end-screen" class="screen hidden"><div class="eyebrow">MISSION REPORT</div><h2 id="end-title">ELIMINATED</h2><p id="end-summary"></p><button id="again" class="primary">DEPLOY AGAIN →</button></div>
+          </div>
+          <div class="bottom-hud">
+            <div class="meter-card"><div class="meter-title"><b>HEALTH</b><span id="health-value">100 / 100</span></div><div class="meter"><span id="health-bar" class="health-fill"></span></div></div>
+            <div class="meter-card"><div class="meter-title"><b>ARMOR</b><span id="armor-value">50 / 100</span></div><div class="meter"><span id="armor-bar" class="armor-fill"></span></div></div>
+            <div class="meter-card"><div class="meter-title"><b>AMMUNITION</b><span id="ammo-value">30 / 120</span></div><div class="meter"><span id="ammo-bar" class="ammo-fill"></span></div></div>
+          </div>
+          <div class="action-row">
+            <div class="weapon"><div class="weapon-icon">▰</div><div><small>EQUIPPED WEAPON</small><b id="weapon-name">ASSAULT RIFLE</b></div></div>
+            <div class="actions"><button id="reload" class="secondary">RELOAD <kbd>R</kbd></button><button id="heal" class="secondary">MEDKIT <kbd>H</kbd></button><button id="pause" class="secondary">PAUSE <kbd>P</kbd></button></div>
+          </div>
+        </section>
+        <aside class="side-column">
+          <div class="panel map-panel"><div class="panel-heading"><b>TACTICAL MAP</b><span>LIVE</span></div><canvas id="minimap" width="260" height="260"></canvas><div class="map-legend"><span><i class="dot you"></i> YOU</span><span><i class="dot enemy"></i> HOSTILES</span><span><i class="dot safe"></i> SAFE ZONE</span></div></div>
+          <div class="panel mission-panel"><div class="panel-heading"><b>MISSION OBJECTIVE</b><span>ACTIVE</span></div><h3>Survive the island</h3><p>Eliminate all enemy operators and remain inside the safe zone as it contracts.</p><div class="objective"><span>01</span><div><b>Secure equipment</b><small>Collect ammo, medical kits and armor.</small></div></div><div class="objective"><span>02</span><div><b>Stay in the circle</b><small>The blue zone damages anyone outside.</small></div></div><div class="objective"><span>03</span><div><b>Be the last survivor</b><small>Clear the island of hostile operators.</small></div></div></div>
+          <div class="panel inventory"><div class="panel-heading"><b>INVENTORY</b><span id="medkit-count">2 MEDKITS</span></div><div class="inventory-slot active-slot"><span>01</span><div class="slot-icon">▰</div><div><b>Assault rifle</b><small>5.56 mm · Automatic</small></div><kbd>1</kbd></div><div class="inventory-slot"><span>02</span><div class="slot-icon med">✚</div><div><b>Medical kit</b><small>Restore 40 health</small></div><kbd>H</kbd></div></div>
+          <div class="panel controls-panel"><div class="panel-heading"><b>FIELD CONTROLS</b></div><div class="control"><kbd>W A S D</kbd><span>Move</span></div><div class="control"><kbd>MOUSE</kbd><span>Look / aim</span></div><div class="control"><kbd>LMB</kbd><span>Fire weapon</span></div><div class="control"><kbd>SHIFT</kbd><span>Sprint</span></div><div class="control"><kbd>SPACE</kbd><span>Jump</span></div><div class="control"><kbd>R</kbd><span>Reload</span></div><div class="control"><kbd>H</kbd><span>Use medkit</span></div><div class="control"><kbd>ESC / P</kbd><span>Pause / release mouse</span></div></div>
+        </aside>
+      </main>
+      <footer>LAST SURVIVOR <span>•</span> LOCAL SINGLE-PLAYER PROTOTYPE <span>•</span> THREE.JS / WEBGL</footer>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
