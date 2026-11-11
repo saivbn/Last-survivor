@@ -9,7 +9,7 @@ A standalone, local single-player third-person battle-royale prototype built wit
 - Ubuntu 22.04 or newer (other Linux distributions should also work)
 - Node.js 20 LTS or newer
 - npm
-- A browser with WebGL 2 enabled (Firefox or Chromium recommended)
+- A browser with WebGL 2 enabled 
 
 ## Install Node.js on Ubuntu
 
